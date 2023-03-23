@@ -15,7 +15,9 @@ const Home = () => {
     },[])
 
   const handleSearch = async (event) => {
-       
+    
+    event.preventDefault()
+    console.log(search)
        
         try {
             const response = await axios.get(url)
@@ -25,7 +27,7 @@ const Home = () => {
         catch (err) {
             console.log(err)
     }
-    //event.preventDefault();
+   
       
     }
     
