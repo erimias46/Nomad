@@ -2,17 +2,20 @@ import React, { useEffect } from 'react'
 import { useState } from 'react'
 
 import axios from 'axios'
-import { Button ,Box,Text,Flex,Spacer, Link,Card,CardHeader,Heading,CardFooter,CardBody,SimpleGrid,Image} from '@chakra-ui/react'
+import { createSearchParams, Link,useNavigate } from 'react-router-dom'
+import { Button ,Box,Text,Flex,Spacer,Card,CardHeader,Heading,CardFooter,CardBody,SimpleGrid,Image} from '@chakra-ui/react'
+
 
 const Home = () => {
+  
     const [search, setSearch] = useState('lord')
     const [data,setData]=useState([])
     
-  const url2 = `https://api.themoviedb.org/3/search/movie?api_key=034535d00ec4b451057f7e2991109a65&language=en-US&query=${search}&page=1&include_adult=false`;
+  const url = `https://api.themoviedb.org/3/search/movie?api_key=034535d00ec4b451057f7e2991109a65&language=en-US&query=${search}&page=1&include_adult=false`;
 
 
   useEffect(() => {
-      console.log(process.env.REACT_APP_APIKEY)
+      
       handleSearch()
       
     },[search])
@@ -21,9 +24,9 @@ const Home = () => {
 
        
         try {
-          const response = await axios.get(url2)
+          const response = await axios.get(url)
           setData(response.data.results)
-          console.log(process.env)
+         
              
           console.log(response.data.results)
           
@@ -33,23 +36,20 @@ const Home = () => {
     }
    
       
-    }
+  }
+  const navigate = useNavigate();
+  const details = (id) => {
+    navigate({
+      pathname: "/details",
+      search: createSearchParams({
+        id: id,
+      }).toString(),
+    });
+  };
     
   return (
     <div>
-      <Flex bg="cyan.600">
-        <Box p="5" bg="red.400">
-          <Text fontSize="3xl">Nomad</Text>
-        </Box>
-        <Spacer />
-        <Box flex="end" p="4" bg="cyan.600">
-          <Button m="4">
-            <Link>About</Link>
-          </Button>
-
-          <Button>Login</Button>
-        </Box>
-      </Flex>
+      
       <h1>Search Movies</h1>
 
       <form action="">
@@ -82,11 +82,17 @@ const Home = () => {
               </CardHeader>
               <CardBody>
                 <Image
-                  src={`https://image.tmdb.org/t/p/w500/${book.poster_path}`} width="100" height="100"
+                  src={`https://image.tmdb.org/t/p/w500/${book.poster_path}`}
+                  width="200"
+                  height="100"
                 />
               </CardBody>
               <CardFooter>
-                <Button>View here</Button>
+                {book.id}
+                <Button onClick={() => { details(book.id) }}>
+                  Details
+                 
+                </Button>
               </CardFooter>
             </Card>
           );
