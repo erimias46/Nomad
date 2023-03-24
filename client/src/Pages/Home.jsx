@@ -84,7 +84,7 @@ const Home = () => {
                 <Image
                   src={`https://image.tmdb.org/t/p/w500/${book.poster_path}`}
                   width="200"
-                  height="100"
+                  height="200"
                 />
               </CardBody>
               <CardFooter>

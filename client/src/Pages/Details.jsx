@@ -67,25 +67,23 @@ const Details = () => {
           </CardFooter>
         </Stack>
       </Card>
-          <hr />
-          
-          <Wrap>
-              {actor.map((act,index) => {
-                  return (
-                    <WrapItem key={index}>
-                      <Flex flexDirection={"column"}>
-                        <Avatar
-                          size="lg"
-                          name="Dan Abrahmov"
-                          src={`https://image.tmdb.org/t/p/w500/${act.profile_path}`}
-                        />
-                        <Text>{act.name}</Text>
-                      </Flex>
-                    </WrapItem>
-                  );
-              })}
-        
-              
+      <hr />
+
+      <Wrap>
+        {actor.slice(0, 20).map((act, index) => {
+          return (
+            <WrapItem key={index}>
+              <Flex flexDirection={"column"}>
+                <Avatar
+                  size="xl"
+                  name={act.name}
+                  src={`https://image.tmdb.org/t/p/w500/${act.profile_path}`}
+                />
+                <Text>{act.name}</Text>
+              </Flex>
+            </WrapItem>
+          );
+        })}
       </Wrap>
     </div>
   );
