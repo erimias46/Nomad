@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useSearchParams } from 'react-router-dom';
 import axios from 'axios';
-import { Card,Stack,Button,CardBody,Heading,CardFooter,Text,Image ,Wrap,WrapItem,Avatar, Flex} from '@chakra-ui/react';
+import { Card,Stack,Button,CardBody,Heading,CardFooter,Text,Image ,Wrap,WrapItem,Avatar,IconButton,CheckboxIcon, Flex,Editable,EditableInput,EditablePreview} from '@chakra-ui/react';
 
 const Details = () => {
     const [searchparams] = useSearchParams()
@@ -40,8 +40,6 @@ const Details = () => {
     
   return (
     <div>
-      <h1>Details</h1>
-      {data.id}
       <Card
         direction={{ base: "column", sm: "row" }}
         overflow="hidden"
@@ -62,15 +60,14 @@ const Details = () => {
 
           <CardFooter>
             <Button variant="solid" colorScheme="blue">
-              Buy Latte
+              Save
             </Button>
           </CardFooter>
         </Stack>
       </Card>
       <hr />
-
       <Wrap>
-        {actor.slice(0, 20).map((act, index) => {
+        {actor.slice(0, 10).map((act, index) => {
           return (
             <WrapItem key={index}>
               <Flex flexDirection={"column"}>
@@ -85,6 +82,14 @@ const Details = () => {
           );
         })}
       </Wrap>
+      <hr />
+      <Flex flexDirection={"row"}>
+        <Editable defaultValue="Write a review " flex="1" bg={"red.300"}>
+          <EditablePreview />
+          <EditableInput />
+        </Editable>
+       <Button>Review</Button>
+      </Flex>
     </div>
   );
 }
