@@ -11,7 +11,7 @@ const Home = () => {
     const [search, setSearch] = useState('lord')
     const [data,setData]=useState([])
     
-  const url = `https://api.themoviedb.org/3/search/movie?api_key=034535d00ec4b451057f7e2991109a65&language=en-US&query=${search}&page=1&include_adult=false`;
+  const url = `https://api.themoviedb.org/3/search/movie?api_key=034535d00ec4b451057f7e2991109a65&language=en-US&query=${search}&page=1&include_adult=true`;
 
 
   useEffect(() => {
@@ -48,9 +48,8 @@ const Home = () => {
   };
     
   return (
-    <div>
-      
-      <h1>Search Movies</h1>
+    <div style={{ backgroundColor: "#111111" }}>
+      <h1 style={{ color: 'blueviolet' }}>Search Movies</h1>
 
       <form action="">
         <input
@@ -71,14 +70,17 @@ const Home = () => {
 
       <SimpleGrid
         spacing={4}
-        templateColumns="repeat(auto-fill, minmax(150px, 1fr))"
+        templateColumns="repeat(auto-fill, minmax(200px, 1fr))"
         flex={1}
       >
         {data.map((book, index) => {
           return (
-            <Card key={index}>
+            <Card key={index} bg="blackAlpha.900">
               <CardHeader>
-                <Heading size="md"> {book.title}</Heading>
+                <Heading size="md" color="whiteAlpha.900">
+                  {" "}
+                  {book.title}
+                </Heading>
               </CardHeader>
               <CardBody>
                 <Image
@@ -87,11 +89,17 @@ const Home = () => {
                   height="200"
                 />
               </CardBody>
-              <CardFooter>
-                {book.id}
-                <Button onClick={() => { details(book.id) }}>
+              <CardFooter
+                display={"flex"}
+                alignContent={"center"}
+                justifyContent="center"
+              >
+                <Button
+                  onClick={() => {
+                    details(book.id);
+                  }}
+                >
                   Details
-                 
                 </Button>
               </CardFooter>
             </Card>
