@@ -29,6 +29,19 @@ const Login = () => {
 
     
   }
+  const handleLogin = async () => {
+    
+    try {
+     const response = await axios.post("http://localhost:3001/auth/login", {
+       email: email,
+       password: password,
+     });
+      
+      console.log(response)
+    } catch (err) {
+      console.log(err);
+    }
+  };
   
     
   return (
@@ -47,7 +60,7 @@ const Login = () => {
           <FormControl>
             <FormLabel>Email address</FormLabel>
             <Input
-              id='reg1'
+              id="reg1"
               type="email"
               onChange={(event) => {
                 setEmail(event.target.value);
@@ -78,12 +91,22 @@ const Login = () => {
           <Heading m={20}>Login</Heading>
           <FormControl>
             <FormLabel>Email address</FormLabel>
-            <Input type="email"
-            id='reg3'/>
+            <Input
+              type="email"
+              id="reg3"
+              onChange={(event) => {
+                setEmail(event.target.value);
+              }}
+            />
             <FormLabel>Password</FormLabel>
             <Input
-              id="reg4" type="password" />
-            <Button bg="gray.700" m={3}>
+              id="reg4"
+              type="password"
+              onChange={(event) => {
+                setPassword(event.target.value);
+              }}
+            />
+            <Button bg="gray.700" m={3} onClick={handleLogin}>
               Login
             </Button>
           </FormControl>
